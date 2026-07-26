@@ -1,0 +1,22 @@
+python
+java
+c
+c++
+sql
+machine learning
+deep learning
+data analysis
+power bi
+tableau
+excel
+html
+css
+javascript
+react
+flask
+django
+nlp
+pandas
+numpy
+scikit-learn
+tensorflow

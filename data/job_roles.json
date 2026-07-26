@@ -1,0 +1,12 @@
+{
+  "Data Scientist": ["python", "pandas", "numpy", "machine learning", "scikit-learn", "data analysis", "nlp", "statistics"],
+  "Data Analyst": ["python", "sql", "excel", "power bi", "data analysis", "tableau", "visualization"],
+  "Full Stack Developer": ["html", "css", "javascript", "react", "flask", "node.js", "sql", "git"],
+  "Machine Learning Engineer": ["python", "tensorflow", "pytorch", "deep learning", "docker", "machine learning", "mlops"],
+  "DevOps Engineer": ["linux", "docker", "kubernetes", "aws", "ci/cd", "terraform", "bash"],
+  "Cloud Architect": ["aws", "azure", "gcp", "terraform", "docker", "networking", "security"],
+  "Cybersecurity Analyst": ["networking", "linux", "python", "penetration testing", "siem", "risk management"],
+  "AI Research Scientist": ["python", "pytorch", "deep learning", "nlp", "statistics", "mathematics", "research"],
+  "Product Manager": ["roadmapping", "agile", "sql", "user research", "stakeholder management", "analytics"],
+  "UI/UX Designer": ["figma", "user research", "wireframing", "prototyping", "html", "css", "design systems"]
+}

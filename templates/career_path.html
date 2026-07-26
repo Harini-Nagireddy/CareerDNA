@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CareerDNA – Career Path</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:#f0f4f9;min-height:100vh;}
+nav{background:#0f172a;padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:60px;}
+.nav-brand{color:#fff;font-size:19px;font-weight:700;}
+.nav-right a{color:rgba(255,255,255,0.55);text-decoration:none;font-size:13px;margin-left:20px;}
+.nav-right a:hover{color:#fff;}
+.logout{color:#f87171 !important;}
+main{max-width:800px;margin:0 auto;padding:44px 24px;}
+.back{display:inline-flex;align-items:center;gap:6px;color:#8b5cf6;text-decoration:none;font-size:14px;font-weight:500;margin-bottom:28px;}
+h1{font-size:27px;font-weight:800;color:#0f172a;margin-bottom:6px;}
+.subtitle{color:#64748b;font-size:15px;margin-bottom:30px;line-height:1.65;}
+
+.info-box{background:#f5f3ff;border:1px solid #ddd6fe;border-radius:12px;padding:14px 18px;
+  font-size:13px;color:#5b21b6;margin-bottom:28px;line-height:1.6;}
+
+/* Toggle */
+.toggle-row{display:flex;gap:0;border-radius:10px;overflow:hidden;border:2px solid #e2e8f0;width:fit-content;margin-bottom:20px;}
+.tog-btn{padding:9px 26px;border:none;background:#fff;color:#64748b;font-size:13px;font-weight:500;cursor:pointer;font-family:'Inter',sans-serif;transition:0.15s;}
+.tog-btn.active{background:#0f172a;color:#fff;}
+
+.panel{background:#fff;border-radius:16px;padding:26px;box-shadow:0 2px 12px rgba(0,0,0,0.06);border:1px solid #e8ecf0;}
+.panel h3{font-size:15px;font-weight:600;color:#0f172a;margin-bottom:16px;}
+
+.drop-zone{border:2px dashed #cbd5e1;border-radius:12px;padding:40px 16px;text-align:center;cursor:pointer;transition:0.2s;background:#f8fafc;}
+.drop-zone:hover,.drop-zone.drag{border-color:#8b5cf6;background:#f5f3ff;}
+.drop-icon{font-size:34px;display:block;margin-bottom:8px;}
+.drop-zone p{color:#64748b;font-size:13px;}
+.drop-zone input{display:none;}
+.fname{color:#7c3aed;font-size:13px;font-weight:500;margin-top:8px;}
+
+textarea{width:100%;height:200px;border:1.5px solid #e2e8f0;border-radius:10px;padding:13px;
+  font-size:13px;font-family:'Inter',sans-serif;resize:vertical;outline:none;color:#0f172a;transition:border 0.2s;}
+textarea:focus{border-color:#8b5cf6;}
+textarea::placeholder{color:#94a3b8;}
+
+.submit-btn{width:100%;margin-top:22px;padding:14px;background:linear-gradient(135deg,#8b5cf6,#7c3aed);
+  color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;transition:0.2s;}
+.submit-btn:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(139,92,246,0.35);}
+
+.error{background:#fee2e2;border:1px solid #fecaca;color:#b91c1c;padding:12px 16px;border-radius:8px;font-size:14px;margin-bottom:20px;}
+.tip{font-size:12px;color:#94a3b8;margin-top:6px;}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-brand">🧬 CareerDNA</div>
+  <div class="nav-right">
+    <a href="/home">🏠 Dashboard</a>
+    <a href="/ats-check">📊 ATS Check</a>
+    <a href="/logout" class="logout">Logout</a>
+  </div>
+</nav>
+<main>
+  <a href="/home" class="back">← Back to Dashboard</a>
+  <h1>🗺️ Explore Your Career Path</h1>
+  <p class="subtitle">Upload your resume or write your bio. We'll show you which tech roles match your skills,
+  your full career progression roadmap, and personalized course recommendations.</p>
+
+  <div class="info-box">
+    💡 <strong>No Job Description needed here.</strong> This tool works entirely from your current skills —
+    perfect for 1st &amp; 2nd year students who are still building their profile.
+  </div>
+
+  {% if error %}<div class="error">⚠️ {{ error }}</div>{% endif %}
+
+  <form action="/career-path" method="POST" enctype="multipart/form-data">
+    <input type="hidden" name="input_mode" id="input_mode" value="file">
+    <div class="panel">
+      <h3>📎 Your Resume or Bio</h3>
+      <div class="toggle-row">
+        <button type="button" class="tog-btn active" id="btn-file" onclick="switchMode('file')">📂 Upload Resume</button>
+        <button type="button" class="tog-btn" id="btn-bio" onclick="switchMode('bio')">✏️ Write Bio</button>
+      </div>
+
+      <div id="file-sec">
+        <div class="drop-zone" id="dropZone" onclick="document.getElementById('rf').click()">
+          <span class="drop-icon">📤</span>
+          <p>Click to upload or drag &amp; drop your resume</p>
+          <p style="font-size:11px;color:#94a3b8;margin-top:4px;">PDF or DOCX accepted</p>
+          <div class="fname" id="fname"></div>
+          <input type="file" id="rf" name="resume" accept=".pdf,.docx" onchange="showName(this)">
+        </div>
+      </div>
+
+      <div id="bio-sec" style="display:none;">
+        <textarea name="bio_text"
+          placeholder="Tell us about yourself — your skills, education, projects, and experience...&#10;&#10;Example:&#10;I am a 2nd year B.Tech CSE student. I know Python, HTML, CSS and JavaScript. I have built 2 projects — a to-do app and a weather app using APIs. I am interested in web development and data science."></textarea>
+        <p class="tip">💡 Be as detailed as possible — include all technologies, tools and topics you know</p>
+      </div>
+    </div>
+
+    <button type="submit" class="submit-btn">🚀 Explore My Career Path →</button>
+  </form>
+</main>
+<script>
+function switchMode(m){
+  const isFile=m==='file';
+  document.getElementById('input_mode').value=m;
+  document.getElementById('file-sec').style.display=isFile?'block':'none';
+  document.getElementById('bio-sec').style.display=isFile?'none':'block';
+  document.getElementById('btn-file').classList.toggle('active',isFile);
+  document.getElementById('btn-bio').classList.toggle('active',!isFile);
+  document.getElementById('rf').required=isFile;
+}
+function showName(i){document.getElementById('fname').textContent=i.files[0]?'✓ '+i.files[0].name:'';}
+const dz=document.getElementById('dropZone');
+dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('drag');});
+dz.addEventListener('dragleave',()=>dz.classList.remove('drag'));
+dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('drag');
+  const f=e.dataTransfer.files[0];if(f){document.getElementById('rf').files=e.dataTransfer.files;showName({files:[f]});}});
+</script>
+</body>
+</html>

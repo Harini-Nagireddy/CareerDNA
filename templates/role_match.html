@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Role Match Result</title>
+</head>
+<body>
+
+<h2>Role Matching Result</h2>
+
+<table border="1">
+<tr>
+<th>Role</th>
+<th>Match %</th>
+</tr>
+
+{% for role, score in results.items() %}
+<tr>
+<td>{{ role }}</td>
+<td>{{ score }}%</td>
+</tr>
+{% endfor %}
+
+</table>
+
+<h3>Based on Skills:</h3>
+<p>{{ skills }}</p>
+
+</body>
+</html>

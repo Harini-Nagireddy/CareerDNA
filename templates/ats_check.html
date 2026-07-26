@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CareerDNA – ATS Score Check</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:#f0f4f9;min-height:100vh;}
+nav{background:#0f172a;padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:60px;}
+.nav-brand{color:#fff;font-size:19px;font-weight:700;}
+.nav-right{display:flex;align-items:center;gap:20px;}
+.nav-right a{color:rgba(255,255,255,0.55);text-decoration:none;font-size:13px;}
+.nav-right a:hover{color:#fff;}
+.logout{color:#f87171 !important;}
+main{max-width:960px;margin:0 auto;padding:44px 24px;}
+.back{display:inline-flex;align-items:center;gap:6px;color:#3b82f6;text-decoration:none;font-size:14px;font-weight:500;margin-bottom:28px;}
+h1{font-size:27px;font-weight:800;color:#0f172a;margin-bottom:6px;}
+.subtitle{color:#64748b;font-size:15px;margin-bottom:32px;line-height:1.6;}
+
+/* Formula badge */
+.formula-badge{background:#eff6ff;border:1px solid #bfdbfe;border-radius:12px;padding:14px 18px;margin-bottom:28px;font-size:13px;color:#1e40af;line-height:1.7;}
+.formula-badge strong{color:#1d4ed8;display:block;margin-bottom:4px;}
+
+/* Toggle */
+.toggle-row{display:flex;gap:0;margin-bottom:20px;border-radius:10px;overflow:hidden;border:2px solid #e2e8f0;width:fit-content;}
+.tog-btn{padding:9px 26px;border:none;background:#fff;color:#64748b;font-size:13px;font-weight:500;cursor:pointer;font-family:'Inter',sans-serif;transition:0.15s;}
+.tog-btn.active{background:#0f172a;color:#fff;}
+
+/* Two column grid */
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
+@media(max-width:680px){.grid{grid-template-columns:1fr;}}
+
+.panel{background:#fff;border-radius:16px;padding:26px;box-shadow:0 2px 12px rgba(0,0,0,0.06);border:1px solid #e8ecf0;}
+.panel h3{font-size:15px;font-weight:600;color:#0f172a;margin-bottom:16px;}
+
+/* Upload zone */
+.drop-zone{border:2px dashed #cbd5e1;border-radius:12px;padding:36px 16px;text-align:center;cursor:pointer;
+  transition:0.2s;background:#f8fafc;}
+.drop-zone:hover,.drop-zone.drag{border-color:#3b82f6;background:#eff6ff;}
+.drop-icon{font-size:34px;display:block;margin-bottom:8px;}
+.drop-zone p{color:#64748b;font-size:13px;}
+.drop-zone input{display:none;}
+.file-name{color:#3b82f6;font-size:13px;font-weight:500;margin-top:8px;}
+
+textarea{width:100%;height:170px;border:1.5px solid #e2e8f0;border-radius:10px;padding:13px;
+  font-size:13px;font-family:'Inter',sans-serif;resize:vertical;outline:none;color:#0f172a;transition:border 0.2s;}
+textarea:focus{border-color:#3b82f6;}
+textarea::placeholder{color:#94a3b8;}
+
+.jd-panel{background:#fff;border-radius:16px;padding:26px;box-shadow:0 2px 12px rgba(0,0,0,0.06);border:2px solid #bfdbfe;margin-top:0;}
+.jd-label{font-size:15px;font-weight:600;color:#0f172a;margin-bottom:6px;display:flex;align-items:center;gap:8px;}
+.req-badge{background:#fee2e2;color:#dc2626;padding:2px 10px;border-radius:20px;font-size:11px;font-weight:700;}
+.jd-hint{font-size:12px;color:#64748b;margin-bottom:14px;}
+
+.submit-btn{width:100%;margin-top:24px;padding:14px;background:linear-gradient(135deg,#3b82f6,#2563eb);
+  color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;transition:0.2s;}
+.submit-btn:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(59,130,246,0.35);}
+
+.error{background:#fee2e2;border:1px solid #fecaca;color:#b91c1c;padding:12px 16px;border-radius:8px;font-size:14px;margin-bottom:20px;}
+.tip{font-size:12px;color:#94a3b8;margin-top:6px;}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-brand">🧬 CareerDNA</div>
+  <div class="nav-right">
+    <a href="/home">🏠 Dashboard</a>
+    <a href="/career-path">🗺 Career Path</a>
+    <a href="/logout" class="logout">Logout</a>
+  </div>
+</nav>
+<main>
+  <a href="/home" class="back">← Back to Dashboard</a>
+  <h1>📊 ATS Score Checker</h1>
+  <p class="subtitle">Paste a Job Description and upload your resume (or write your bio).<br>
+  We'll compare them and calculate a precise ATS match score.</p>
+
+
+  {% if error %}<div class="error">⚠️ {{ error }}</div>{% endif %}
+
+  <form action="/ats-check" method="POST" enctype="multipart/form-data">
+    <input type="hidden" name="input_mode" id="input_mode" value="file">
+
+    <div class="grid">
+      <!-- LEFT: resume input -->
+      <div class="panel">
+        <h3>📎 Your Resume</h3>
+        <div class="toggle-row">
+          <button type="button" class="tog-btn active" id="btn-file" onclick="switchMode('file')">📂 Upload File</button>
+          <button type="button" class="tog-btn" id="btn-bio"  onclick="switchMode('bio')">✏️ Write Bio</button>
+        </div>
+
+        <div id="file-sec">
+          <div class="drop-zone" id="dropZone" onclick="document.getElementById('rf').click()">
+            <span class="drop-icon">📤</span>
+            <p>Click to upload or drag &amp; drop</p>
+            <p style="font-size:11px;color:#94a3b8;margin-top:3px;">PDF or DOCX accepted</p>
+            <div class="file-name" id="fname"></div>
+            <input type="file" id="rf" name="resume" accept=".pdf,.docx" onchange="showName(this)">
+          </div>
+        </div>
+
+        <div id="bio-sec" style="display:none;">
+          <textarea name="bio_text" placeholder="Write about yourself — your skills, education, projects, and experience...&#10;&#10;Tip: minimum 100 words for a meaningful ATS score."></textarea>
+          <p class="tip">💡 Be specific — mention technologies, tools, project names and percentages</p>
+        </div>
+      </div>
+
+      <!-- RIGHT: Job Description -->
+      <div class="jd-panel">
+        <div class="jd-label">🎯 Job Description <span class="req-badge">REQUIRED</span></div>
+        <p class="jd-hint">Copy-paste the full JD from LinkedIn, Naukri, or any job portal.</p>
+        <textarea name="job_description" style="height:200px;"
+          placeholder="We are looking for a Python Developer with experience in Flask, SQL and REST APIs. The candidate should know data analysis tools such as Pandas and NumPy. Knowledge of Docker and AWS is a plus..."></textarea>
+        <p class="tip">📌 The more complete the JD, the more accurate your ATS score will be</p>
+      </div>
+    </div>
+
+    <button type="submit" class="submit-btn">🚀 Calculate My ATS Score</button>
+  </form>
+</main>
+<script>
+function switchMode(m){
+  const isFile = m==='file';
+  document.getElementById('input_mode').value = m;
+  document.getElementById('file-sec').style.display = isFile?'block':'none';
+  document.getElementById('bio-sec').style.display  = isFile?'none':'block';
+  document.getElementById('btn-file').classList.toggle('active', isFile);
+  document.getElementById('btn-bio').classList.toggle('active',  !isFile);
+  document.getElementById('rf').required = isFile;
+}
+function showName(i){ document.getElementById('fname').textContent = i.files[0]?'✓ '+i.files[0].name:''; }
+const dz=document.getElementById('dropZone');
+dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('drag');});
+dz.addEventListener('dragleave',()=>dz.classList.remove('drag'));
+dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('drag');
+  const f=e.dataTransfer.files[0];if(f){document.getElementById('rf').files=e.dataTransfer.files;showName({files:[f]});}});
+</script>
+</body>
+</html>

@@ -1,0 +1,242 @@
+{
+  "python": {
+    "free": [
+      {"name": "Python – freeCodeCamp (YouTube)", "link": "https://www.youtube.com/watch?v=rfscVS0vtbw"},
+      {"name": "Python for Everybody – Coursera (Audit)", "link": "https://www.coursera.org/specializations/python"}
+    ],
+    "paid": [
+      {"name": "Complete Python Bootcamp – Udemy", "link": "https://www.udemy.com/course/complete-python-bootcamp/"}
+    ]
+  },
+  "pandas": {
+    "free": [
+      {"name": "Pandas Tutorial – freeCodeCamp (YouTube)", "link": "https://www.youtube.com/watch?v=vmEHCJofslg"}
+    ],
+    "paid": [
+      {"name": "Data Analysis with Python – Coursera", "link": "https://www.coursera.org/learn/data-analysis-with-python"}
+    ]
+  },
+  "numpy": {
+    "free": [
+      {"name": "NumPy Full Course – YouTube", "link": "https://www.youtube.com/watch?v=QUT1VHiLmmI"}
+    ],
+    "paid": [
+      {"name": "NumPy for Data Science – Udemy", "link": "https://www.udemy.com/course/numpy-for-data-science/"}
+    ]
+  },
+  "machine learning": {
+    "free": [
+      {"name": "ML Crash Course – Google", "link": "https://developers.google.com/machine-learning/crash-course"},
+      {"name": "Machine Learning – Andrew Ng (YouTube)", "link": "https://www.youtube.com/watch?v=jGwO_UgTS7I"}
+    ],
+    "paid": [
+      {"name": "Machine Learning Specialization – Coursera", "link": "https://www.coursera.org/specializations/machine-learning-introduction"}
+    ]
+  },
+  "scikit-learn": {
+    "free": [
+      {"name": "Scikit-learn Tutorial – YouTube", "link": "https://www.youtube.com/watch?v=0Lt9w-BxKFQ"}
+    ],
+    "paid": [
+      {"name": "ML with Scikit-Learn – Udemy", "link": "https://www.udemy.com/course/machine-learning-scikit-learn/"}
+    ]
+  },
+  "nlp": {
+    "free": [
+      {"name": "NLP Zero to Hero – freeCodeCamp (YouTube)", "link": "https://www.youtube.com/watch?v=X2vAabgKiuM"}
+    ],
+    "paid": [
+      {"name": "NLP Specialization – Coursera", "link": "https://www.coursera.org/specializations/natural-language-processing"}
+    ]
+  },
+  "data analysis": {
+    "free": [
+      {"name": "Data Analysis with Python – freeCodeCamp", "link": "https://www.youtube.com/watch?v=r-uOLxNrNk8"}
+    ],
+    "paid": [
+      {"name": "Google Data Analytics – Coursera", "link": "https://www.coursera.org/professional-certificates/google-data-analytics"}
+    ]
+  },
+  "sql": {
+    "free": [
+      {"name": "SQL Full Course – freeCodeCamp (YouTube)", "link": "https://www.youtube.com/watch?v=HXV3zeQKqGY"},
+      {"name": "SQLZoo – Interactive Practice", "link": "https://sqlzoo.net/"}
+    ],
+    "paid": [
+      {"name": "SQL for Data Science – Coursera", "link": "https://www.coursera.org/learn/sql-for-data-science"}
+    ]
+  },
+  "excel": {
+    "free": [
+      {"name": "Excel Full Course – YouTube", "link": "https://www.youtube.com/watch?v=Vl0H-qTclOg"}
+    ],
+    "paid": [
+      {"name": "Excel Skills for Business – Coursera", "link": "https://www.coursera.org/specializations/excel"}
+    ]
+  },
+  "power bi": {
+    "free": [
+      {"name": "Power BI Tutorial – YouTube", "link": "https://www.youtube.com/watch?v=TmhQCQr_DCA"}
+    ],
+    "paid": [
+      {"name": "Microsoft Power BI Desktop – Udemy", "link": "https://www.udemy.com/course/microsoft-power-bi-up-running-with-power-bi-desktop/"}
+    ]
+  },
+  "tableau": {
+    "free": [
+      {"name": "Tableau for Beginners – YouTube", "link": "https://www.youtube.com/watch?v=TPMlZxRRaBQ"},
+      {"name": "Tableau Public (Free Tool)", "link": "https://public.tableau.com/"}
+    ],
+    "paid": [
+      {"name": "Tableau 2024 A-Z – Udemy", "link": "https://www.udemy.com/course/tableau10/"}
+    ]
+  },
+  "statistics": {
+    "free": [
+      {"name": "Statistics for Data Science – YouTube", "link": "https://www.youtube.com/watch?v=xxpc-HPKN28"},
+      {"name": "Khan Academy Statistics", "link": "https://www.khanacademy.org/math/statistics-probability"}
+    ],
+    "paid": [
+      {"name": "Statistics with Python – Coursera", "link": "https://www.coursera.org/specializations/statistics-with-python"}
+    ]
+  },
+  "html": {
+    "free": [
+      {"name": "Responsive Web Design – freeCodeCamp", "link": "https://www.freecodecamp.org/learn/2022/responsive-web-design/"}
+    ],
+    "paid": [
+      {"name": "Build Responsive Real-World Websites – Udemy", "link": "https://www.udemy.com/course/design-and-develop-a-killer-website-with-html5-and-css3/"}
+    ]
+  },
+  "css": {
+    "free": [
+      {"name": "CSS Full Course – freeCodeCamp (YouTube)", "link": "https://www.youtube.com/watch?v=1Rs2ND1ryYc"}
+    ],
+    "paid": [
+      {"name": "Advanced CSS and Sass – Udemy", "link": "https://www.udemy.com/course/advanced-css-and-sass/"}
+    ]
+  },
+  "javascript": {
+    "free": [
+      {"name": "JavaScript Algorithms – freeCodeCamp", "link": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/"},
+      {"name": "JavaScript Full Course – YouTube", "link": "https://www.youtube.com/watch?v=PkZNo7MFNFg"}
+    ],
+    "paid": [
+      {"name": "The Complete JavaScript Course – Udemy", "link": "https://www.udemy.com/course/the-complete-javascript-course/"}
+    ]
+  },
+  "react": {
+    "free": [
+      {"name": "React Full Course – freeCodeCamp (YouTube)", "link": "https://www.youtube.com/watch?v=bMknfKXIFA8"}
+    ],
+    "paid": [
+      {"name": "React – The Complete Guide – Udemy", "link": "https://www.udemy.com/course/react-the-complete-guide-incl-redux/"}
+    ]
+  },
+  "flask": {
+    "free": [
+      {"name": "Flask Tutorial – YouTube", "link": "https://www.youtube.com/watch?v=Z1RJmh_OqeA"}
+    ],
+    "paid": [
+      {"name": "Python and Flask Bootcamp – Udemy", "link": "https://www.udemy.com/course/python-and-flask-bootcamp-create-websites-using-flask/"}
+    ]
+  },
+  "node.js": {
+    "free": [
+      {"name": "Node.js Full Course – freeCodeCamp (YouTube)", "link": "https://www.youtube.com/watch?v=Oe421EPjeBE"}
+    ],
+    "paid": [
+      {"name": "The Complete Node.js Developer Course – Udemy", "link": "https://www.udemy.com/course/the-complete-nodejs-developer-course-2/"}
+    ]
+  },
+  "git": {
+    "free": [
+      {"name": "Git & GitHub Crash Course – YouTube", "link": "https://www.youtube.com/watch?v=RGOj5yH7evk"}
+    ],
+    "paid": [
+      {"name": "Git Complete – Udemy", "link": "https://www.udemy.com/course/git-complete/"}
+    ]
+  },
+  "docker": {
+    "free": [
+      {"name": "Docker Tutorial for Beginners – YouTube", "link": "https://www.youtube.com/watch?v=fqMOX6JJhGo"}
+    ],
+    "paid": [
+      {"name": "Docker & Kubernetes – Udemy", "link": "https://www.udemy.com/course/docker-kubernetes-the-practical-guide/"}
+    ]
+  },
+  "kubernetes": {
+    "free": [
+      {"name": "Kubernetes Tutorial – YouTube", "link": "https://www.youtube.com/watch?v=X48VuDVv0do"}
+    ],
+    "paid": [
+      {"name": "Certified Kubernetes Administrator – Udemy", "link": "https://www.udemy.com/course/certified-kubernetes-administrator-with-practice-tests/"}
+    ]
+  },
+  "aws": {
+    "free": [
+      {"name": "AWS Cloud Practitioner – freeCodeCamp (YouTube)", "link": "https://www.youtube.com/watch?v=3hLmDS179YE"},
+      {"name": "AWS Free Tier", "link": "https://aws.amazon.com/free/"}
+    ],
+    "paid": [
+      {"name": "AWS Certified Cloud Practitioner – Udemy", "link": "https://www.udemy.com/course/aws-certified-cloud-practitioner-new/"}
+    ]
+  },
+  "tensorflow": {
+    "free": [
+      {"name": "TensorFlow 2.0 – freeCodeCamp (YouTube)", "link": "https://www.youtube.com/watch?v=tPYj3fFJGjk"}
+    ],
+    "paid": [
+      {"name": "Deep Learning with TensorFlow – Udemy", "link": "https://www.udemy.com/course/complete-guide-to-tensorflow-for-deep-learning-with-python/"}
+    ]
+  },
+  "pytorch": {
+    "free": [
+      {"name": "PyTorch for Deep Learning – YouTube", "link": "https://www.youtube.com/watch?v=Z_ikDlimN6A"}
+    ],
+    "paid": [
+      {"name": "PyTorch Ultimate – Udemy", "link": "https://www.udemy.com/course/pytorch-deep-learning/"}
+    ]
+  },
+  "deep learning": {
+    "free": [
+      {"name": "Deep Learning Specialization – YouTube (Audit)", "link": "https://www.youtube.com/watch?v=CS4cs9xVecg"}
+    ],
+    "paid": [
+      {"name": "Deep Learning Specialization – Coursera", "link": "https://www.coursera.org/specializations/deep-learning"}
+    ]
+  },
+  "linux": {
+    "free": [
+      {"name": "Linux Command Line – freeCodeCamp (YouTube)", "link": "https://www.youtube.com/watch?v=ZtqBQ68cfJc"}
+    ],
+    "paid": [
+      {"name": "Linux Administration Bootcamp – Udemy", "link": "https://www.udemy.com/course/linux-administration-bootcamp/"}
+    ]
+  },
+  "figma": {
+    "free": [
+      {"name": "Figma UI Design Tutorial – YouTube", "link": "https://www.youtube.com/watch?v=FTFaQWZBqQ8"},
+      {"name": "Figma Free Plan", "link": "https://www.figma.com/"}
+    ],
+    "paid": [
+      {"name": "UI/UX Design Bootcamp – Udemy", "link": "https://www.udemy.com/course/ui-ux-web-design-using-adobe-xd/"}
+    ]
+  },
+  "networking": {
+    "free": [
+      {"name": "Computer Networking – freeCodeCamp (YouTube)", "link": "https://www.youtube.com/watch?v=qiQR5rTSshw"}
+    ],
+    "paid": [
+      {"name": "CompTIA Network+ – Udemy", "link": "https://www.udemy.com/course/comptia-network-cert-n10-008-the-total-course/"}
+    ]
+  },
+  "agile": {
+    "free": [
+      {"name": "Agile & Scrum Basics – YouTube", "link": "https://www.youtube.com/watch?v=2Vt7Ik8Ublw"}
+    ],
+    "paid": [
+      {"name": "Agile Crash Course – Udemy", "link": "https://www.udemy.com/course/agile-fundamentals-scrum-kanban-scrumban/"}
+    ]
+  }
+}

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CareerDNA – Sign Up</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,#0f172a 0%,#1e3a5f 60%,#0f2744 100%);}
+.card{background:rgba(255,255,255,0.06);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.13);
+  border-radius:20px;padding:48px 40px;width:440px;box-shadow:0 24px 60px rgba(0,0,0,0.45);}
+.logo{text-align:center;margin-bottom:28px;}
+.logo-icon{font-size:44px;display:block;margin-bottom:8px;}
+.logo h1{color:#fff;font-size:24px;font-weight:800;}
+.logo p{color:rgba(255,255,255,0.45);font-size:13px;margin-top:4px;}
+.field{margin-bottom:16px;}
+label{display:block;color:rgba(255,255,255,0.65);font-size:13px;font-weight:500;margin-bottom:6px;}
+input,select{width:100%;padding:11px 14px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);
+  border-radius:10px;color:#fff;font-size:14px;font-family:'Inter',sans-serif;outline:none;transition:border 0.2s;}
+input:focus,select:focus{border-color:rgba(99,179,237,0.7);}
+input::placeholder{color:rgba(255,255,255,0.28);}
+select option{background:#1e3a5f;color:#fff;}
+.btn{width:100%;padding:13px;background:linear-gradient(135deg,#10b981,#059669);color:#fff;border:none;
+  border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;transition:0.2s;margin-top:6px;}
+.btn:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(16,185,129,0.4);}
+.error{background:rgba(239,68,68,0.15);border:1px solid rgba(239,68,68,0.4);color:#fca5a5;
+  padding:11px 14px;border-radius:8px;font-size:13px;margin-bottom:16px;text-align:center;}
+.success{background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.4);color:#6ee7b7;
+  padding:11px 14px;border-radius:8px;font-size:13px;margin-bottom:16px;text-align:center;}
+.divider{border:none;border-top:1px solid rgba(255,255,255,0.1);margin:20px 0;}
+.bottom{text-align:center;font-size:13px;color:rgba(255,255,255,0.4);}
+.bottom a{color:#60a5fa;text-decoration:none;font-weight:500;}
+.hint{font-size:11px;color:rgba(255,255,255,0.3);margin-top:4px;}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="logo">
+    <span class="logo-icon">🧬</span>
+    <h1>Create Account</h1>
+    <p>Join CareerDNA — build your career with AI</p>
+  </div>
+  {% if error %}<div class="error">⚠️ {{ error }}</div>{% endif %}
+  {% if success %}
+    <div class="success">✅ {{ success }} <a href="/" style="color:#34d399;font-weight:600;">Login now →</a></div>
+  {% endif %}
+  <form method="POST">
+    <div class="field">
+      <label>Full Name</label>
+      <input type="text" name="fullname" placeholder="Your full name" required>
+    </div>
+    <div class="field">
+      <label>Username</label>
+      <input type="text" name="username" placeholder="Choose a username (min 3 chars)" required>
+      <p class="hint">Only letters, numbers and underscores</p>
+    </div>
+    <div class="field">
+      <label>College Year</label>
+      <select name="year">
+        <option value="1">1st Year</option>
+        <option value="2">2nd Year</option>
+        <option value="3">3rd Year</option>
+        <option value="4">4th Year</option>
+        <option value="other">Graduate / Other</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>Password</label>
+      <input type="password" name="password" placeholder="At least 6 characters" required>
+    </div>
+    <div class="field">
+      <label>Confirm Password</label>
+      <input type="password" name="confirm" placeholder="Re-enter password" required>
+    </div>
+    <button class="btn" type="submit">Create Account →</button>
+  </form>
+  <hr class="divider">
+  <div class="bottom">Already have an account? <a href="/">Sign In</a></div>
+</div>
+</body>
+</html>

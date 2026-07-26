@@ -1,0 +1,8 @@
+Flask
+pdfplumber
+python-docx
+spacy
+pandas
+numpy
+scikit-learn
+docx2pdf

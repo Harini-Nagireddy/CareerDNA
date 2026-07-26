@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CareerDNA – Career Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',sans-serif;background:#f0f4f9;min-height:100vh;}
+  nav{background:#0f172a;padding:16px 32px;display:flex;align-items:center;justify-content:space-between;}
+  .nav-brand{color:#fff;font-size:20px;font-weight:700;}
+  .nav-links{display:flex;gap:24px;align-items:center;}
+  .nav-links a{color:rgba(255,255,255,0.6);text-decoration:none;font-size:14px;}
+  .nav-links .logout{color:#f87171;font-size:13px;}
+  main{max-width:1100px;margin:0 auto;padding:40px 24px;}
+  .back-btn{display:inline-flex;align-items:center;gap:6px;color:#3b82f6;text-decoration:none;
+    font-size:14px;font-weight:500;margin-bottom:28px;}
+
+  .hero{background:linear-gradient(135deg,#064e3b,#065f46);color:#fff;border-radius:20px;padding:36px;
+    display:flex;align-items:center;gap:40px;margin-bottom:28px;flex-wrap:wrap;}
+  .score-ring{width:120px;height:120px;border-radius:50%;
+    background:conic-gradient(#34d399 calc(var(--pct)*1%),#134e4a 0);
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative;}
+  .score-ring::before{content:'';position:absolute;width:90px;height:90px;background:#065f46;border-radius:50%;}
+  .score-ring span{position:relative;z-index:1;font-size:28px;font-weight:800;color:#34d399;}
+  .hero-info h2{font-size:26px;font-weight:700;margin-bottom:6px;}
+  .hero-info p{color:rgba(255,255,255,0.7);font-size:15px;line-height:1.6;}
+  .formula{background:rgba(255,255,255,0.08);border-radius:10px;padding:12px 16px;margin-top:12px;font-size:13px;color:rgba(255,255,255,0.5);}
+  .formula b{color:#6ee7b7;}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin-bottom:20px;}
+  @media(max-width:800px){.grid2,.grid3{grid-template-columns:1fr;}}
+
+  .panel{background:#fff;border-radius:16px;padding:24px;box-shadow:0 2px 12px rgba(0,0,0,0.06);border:1px solid #e8ecf0;}
+  .panel h3{font-size:16px;font-weight:600;color:#0f172a;margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+  .full{grid-column:1/-1;}
+
+  /* Role bars */
+  .role-row{margin-bottom:14px;}
+  .role-row .role-name{font-size:14px;font-weight:500;color:#0f172a;margin-bottom:5px;display:flex;justify-content:space-between;}
+  .bar-bg{height:10px;background:#f1f5f9;border-radius:10px;overflow:hidden;}
+  .bar-fill{height:100%;border-radius:10px;background:linear-gradient(90deg,#3b82f6,#06b6d4);transition:width 1s ease;}
+
+  /* Skill level pills */
+  .skill-pills{display:flex;flex-wrap:wrap;gap:6px;}
+  .pill{padding:4px 12px;border-radius:20px;font-size:12px;font-weight:500;}
+  .pill-expert{background:#eff6ff;color:#1d4ed8;border:1px solid #bfdbfe;}
+  .pill-intermediate{background:#f0fdf4;color:#15803d;border:1px solid #bbf7d0;}
+  .pill-beginner{background:#fefce8;color:#a16207;border:1px solid #fde68a;}
+
+  /* Career path steps */
+  .path-steps{display:flex;align-items:center;flex-wrap:wrap;gap:6px;}
+  .path-step{background:#f8fafc;border:1.5px solid #e2e8f0;color:#475569;padding:6px 14px;border-radius:8px;font-size:13px;font-weight:500;}
+  .path-step.current{background:#eff6ff;border-color:#bfdbfe;color:#2563eb;font-weight:700;}
+  .path-arrow{color:#cbd5e1;font-size:14px;}
+
+  /* JD keywords */
+  .tag{padding:4px 10px;border-radius:20px;font-size:12px;font-weight:500;}
+  .tag-matched{background:#f0fdf4;color:#15803d;border:1px solid #bbf7d0;}
+  .tag-missing{background:#fef2f2;color:#dc2626;border:1px solid #fecaca;}
+  .tags{display:flex;flex-wrap:wrap;gap:6px;}
+
+  /* Feedback */
+  .tip-item{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid #f1f5f9;align-items:flex-start;}
+  .tip-item:last-child{border:none;}
+  .tip-item p{font-size:14px;color:#475569;}
+
+  .cta{background:linear-gradient(135deg,#3b82f6,#2563eb);color:#fff;border:none;padding:12px 24px;
+    border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;
+    display:inline-block;text-decoration:none;}
+  .cta:hover{box-shadow:0 6px 20px rgba(59,130,246,0.35);}
+
+  select{padding:10px 14px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:14px;
+    font-family:'Inter',sans-serif;outline:none;color:#0f172a;}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-brand">🧬 CareerDNA</div>
+  <div class="nav-links">
+    <a href="/home">🏠 Analyze</a>
+    <a href="/career-paths">🗺 Career Paths</a>
+    <span style="color:rgba(255,255,255,0.3)">|</span>
+    <a href="/logout" class="logout">Logout</a>
+  </div>
+</nav>
+<main>
+  <a href="/home" class="back-btn">← Analyze Another Resume</a>
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="score-ring" style="--pct:{{ ats_score }}">
+      <span>{{ ats_score }}</span>
+    </div>
+    <div class="hero-info">
+      <h2>✅ Strong ATS Score!</h2>
+      <p>Your score of <b>{{ ats_score }}/100</b> passes the ATS threshold. Here's your full career intelligence report.</p>
+      {% if jd_provided %}
+      <div class="formula"><b>Formula:</b> 40% JD keyword match + 35% structure + 15% action verbs + 10% formatting</div>
+      {% else %}
+      <div class="formula"><b>Formula:</b> 30% skills + 20% sections + 15% action verbs + 15% keywords + 10% bullets + 5% metrics + 5% length</div>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- Role Match + Skill Levels -->
+  <div class="grid2">
+    <div class="panel">
+      <h3>🎯 Role Match Scores</h3>
+      {% for role, score in results.items() %}
+      <div class="role-row">
+        <div class="role-name"><span>{{ role }}</span><span>{{ score }}%</span></div>
+        <div class="bar-bg"><div class="bar-fill" style="width:{{ score }}%"></div></div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="panel">
+      <h3>⚡ Skill Levels</h3>
+      <div class="skill-pills">
+        {% for skill, level in skill_levels.items() %}
+        <span class="pill {% if level == 'Expert' %}pill-expert{% elif level == 'Intermediate' %}pill-intermediate{% else %}pill-beginner{% endif %}">
+          {{ skill }} · {{ level }}
+        </span>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <!-- Career Path -->
+  <div class="panel" style="margin-bottom:20px;">
+    <h3>🗺️ Your Career Progression Path</h3>
+    <div class="path-steps">
+      {% for step in career_paths %}
+      <span class="path-step {% if loop.index == 1 %}current{% endif %}">{{ step }}</span>
+      {% if not loop.last %}<span class="path-arrow">→</span>{% endif %}
+      {% endfor %}
+    </div>
+    <p style="font-size:13px;color:#94a3b8;margin-top:12px;">
+      <a href="/career-paths" style="color:#3b82f6;text-decoration:none;">View all 10 career tracks →</a>
+    </p>
+  </div>
+
+  <!-- JD Keywords -->
+  {% if jd_provided %}
+  <div class="grid2" style="margin-bottom:20px;">
+    <div class="panel">
+      <h3>✅ JD Keywords Matched ({{ matched_keywords|length }})</h3>
+      <div class="tags">
+        {% for k in matched_keywords[:15] %}
+        <span class="tag tag-matched">{{ k }}</span>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="panel">
+      <h3>❌ JD Keywords Missing ({{ missing_keywords|length }})</h3>
+      <div class="tags">
+        {% for k in missing_keywords[:15] %}
+        <span class="tag tag-missing">{{ k }}</span>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- Feedback + Skill Gap -->
+  <div class="grid2">
+    <div class="panel">
+      <h3>💡 Improvement Tips</h3>
+      {% for item in feedback %}
+      <div class="tip-item"><span>⚠️</span><p>{{ item }}</p></div>
+      {% else %}
+      <p style="color:#15803d;font-size:14px;">✅ Your resume looks great! No major issues found.</p>
+      {% endfor %}
+    </div>
+
+    <div class="panel">
+      <h3>🔍 Skill Gap Analyzer</h3>
+      <p style="font-size:14px;color:#64748b;margin-bottom:16px;">Pick a target role to see missing skills and course recommendations.</p>
+      <form action="/skill-gap" method="POST">
+        {% for s in skills %}<input type="hidden" name="skills" value="{{ s }}">{% endfor %}
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <select name="role">
+            <option>Data Scientist</option>
+            <option>Data Analyst</option>
+            <option>Full Stack Developer</option>
+            <option>Machine Learning Engineer</option>
+            <option>DevOps Engineer</option>
+            <option>Cloud Architect</option>
+            <option>Cybersecurity Analyst</option>
+            <option>AI Research Scientist</option>
+            <option>Product Manager</option>
+            <option>UI/UX Designer</option>
+          </select>
+          <button type="submit" class="cta">Analyze Skill Gap →</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</main>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CareerDNA – Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:#f0f4f9;min-height:100vh;}
+nav{background:#0f172a;padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:60px;}
+.nav-brand{color:#fff;font-size:19px;font-weight:700;display:flex;align-items:center;gap:8px;}
+.nav-right{display:flex;align-items:center;gap:20px;}
+.nav-right a{color:rgba(255,255,255,0.55);text-decoration:none;font-size:13px;transition:color 0.2s;}
+.nav-right a:hover{color:#fff;}
+.logout{color:#f87171 !important;}
+main{max-width:900px;margin:0 auto;padding:60px 24px;}
+.greeting{text-align:center;margin-bottom:56px;}
+.greeting h1{font-size:34px;font-weight:800;color:#0f172a;letter-spacing:-0.5px;}
+.greeting p{color:#64748b;font-size:16px;margin-top:10px;line-height:1.6;}
+
+/* Two big cards side by side */
+.options{display:grid;grid-template-columns:1fr 1fr;gap:28px;}
+@media(max-width:620px){.options{grid-template-columns:1fr;}}
+
+.opt-card{background:#fff;border-radius:22px;padding:44px 36px;border:2px solid #e8ecf0;
+  box-shadow:0 4px 20px rgba(0,0,0,0.06);transition:all 0.25s;display:flex;flex-direction:column;align-items:center;text-align:center;}
+.opt-card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(0,0,0,0.13);}
+.opt-card.blue:hover{border-color:#3b82f6;}
+.opt-card.purple:hover{border-color:#8b5cf6;}
+
+.opt-icon{font-size:58px;margin-bottom:20px;display:block;}
+.opt-card h2{font-size:21px;font-weight:700;color:#0f172a;margin-bottom:12px;}
+.opt-card p{font-size:14px;color:#64748b;line-height:1.7;margin-bottom:28px;flex-grow:1;}
+
+.tag{display:inline-block;padding:4px 14px;border-radius:20px;font-size:12px;font-weight:600;margin-bottom:22px;}
+.tag-blue{background:#eff6ff;color:#3b82f6;border:1px solid #bfdbfe;}
+.tag-purple{background:#f5f3ff;color:#7c3aed;border:1px solid #ddd6fe;}
+
+.opt-btn{display:inline-block;width:100%;padding:13px;border-radius:12px;font-size:15px;
+  font-weight:600;text-decoration:none;text-align:center;transition:0.2s;cursor:pointer;border:none;font-family:'Inter',sans-serif;}
+.opt-btn.blue{background:linear-gradient(135deg,#3b82f6,#2563eb);color:#fff;}
+.opt-btn.blue:hover{box-shadow:0 8px 24px rgba(59,130,246,0.4);}
+.opt-btn.purple{background:linear-gradient(135deg,#8b5cf6,#7c3aed);color:#fff;}
+.opt-btn.purple:hover{box-shadow:0 8px 24px rgba(139,92,246,0.4);}
+
+.info-box{background:#fff;border-radius:14px;padding:20px 24px;border:1px solid #e8ecf0;
+  margin-top:28px;display:flex;align-items:flex-start;gap:14px;}
+.info-box .icon{font-size:24px;flex-shrink:0;margin-top:2px;}
+.info-box p{font-size:14px;color:#475569;line-height:1.65;}
+.info-box strong{color:#0f172a;}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-brand">🧬 CareerDNA</div>
+  <div class="nav-right">
+    <span style="color:rgba(255,255,255,0.4);font-size:13px;">👤 {{ username }}</span>
+    <a href="/logout" class="logout">Logout</a>
+  </div>
+</nav>
+
+<main>
+  <div class="greeting">
+    <h1>Welcome back, {{ username }}! 👋</h1>
+    <p>What would you like to do today?<br>Choose one of the options below to get started.</p>
+  </div>
+
+  <div class="options">
+
+    <!-- ATS Check -->
+    <div class="opt-card blue">
+      <span class="opt-icon">📊</span>
+      <span class="tag tag-blue">Requires Job Description</span>
+      <h2>Check ATS Score</h2>
+      <p>Upload your resume or write your bio, paste a Job Description, and get a detailed ATS score showing how well your resume matches the role. Perfect for 3rd &amp; 4th year students applying for internships or jobs.</p>
+      <a href="/ats-check" class="opt-btn blue">Check My ATS Score →</a>
+    </div>
+
+    <!-- Career Path -->
+    <div class="opt-card purple">
+      <span class="opt-icon">🗺️</span>
+      <span class="tag tag-purple">No JD needed</span>
+      <h2>Explore Career Path</h2>
+      <p>Upload your resume or write your bio and discover which tech roles match your current skills. See your career progression roadmap, skill levels, and get course recommendations to fill the gaps.</p>
+      <a href="/career-path" class="opt-btn purple">Explore My Career Path →</a>
+    </div>
+
+  </div>
+
+  <div class="info-box">
+    <span class="icon">💡</span>
+    <p><strong>1st &amp; 2nd year students:</strong> Start with <strong>Explore Career Path</strong> — no job description needed. 
+    You'll see what roles fit your skills and what to learn next. 
+    Once you're applying for internships (3rd/4th year), use <strong>Check ATS Score</strong> with a real JD to see how your resume performs.</p>
+  </div>
+</main>
+</body>
+</html>

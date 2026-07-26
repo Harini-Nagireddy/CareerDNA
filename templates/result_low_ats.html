@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CareerDNA – ATS Results</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',sans-serif;background:#f0f4f9;min-height:100vh;}
+  nav{background:#0f172a;padding:16px 32px;display:flex;align-items:center;justify-content:space-between;}
+  .nav-brand{color:#fff;font-size:20px;font-weight:700;}
+  .nav-links{display:flex;gap:24px;align-items:center;}
+  .nav-links a{color:rgba(255,255,255,0.6);text-decoration:none;font-size:14px;}
+  .nav-links .logout{color:#f87171;font-size:13px;}
+  main{max-width:1000px;margin:0 auto;padding:40px 24px;}
+  .back-btn{display:inline-flex;align-items:center;gap:6px;color:#3b82f6;text-decoration:none;
+    font-size:14px;font-weight:500;margin-bottom:28px;}
+
+  /* Score hero */
+  .score-hero{background:linear-gradient(135deg,#1e3a5f,#0f172a);color:#fff;border-radius:20px;
+    padding:36px;display:flex;align-items:center;gap:40px;margin-bottom:28px;flex-wrap:wrap;}
+  .score-ring{width:120px;height:120px;border-radius:50%;background:conic-gradient(#f59e0b calc(var(--pct)*1%),#334155 0);
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative;}
+  .score-ring::before{content:'';position:absolute;width:90px;height:90px;background:#1e3a5f;border-radius:50%;}
+  .score-ring span{position:relative;z-index:1;font-size:28px;font-weight:800;color:#f59e0b;}
+  .score-info h2{font-size:26px;font-weight:700;margin-bottom:6px;}
+  .score-info p{color:rgba(255,255,255,0.6);font-size:15px;line-height:1.6;}
+  .score-formula{background:rgba(255,255,255,0.07);border-radius:10px;padding:14px 18px;margin-top:14px;font-size:13px;color:rgba(255,255,255,0.5);}
+  .score-formula b{color:#93c5fd;}
+
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+  @media(max-width:700px){.grid{grid-template-columns:1fr;}}
+
+  .panel{background:#fff;border-radius:16px;padding:24px;box-shadow:0 2px 12px rgba(0,0,0,0.06);border:1px solid #e8ecf0;}
+  .panel h3{font-size:16px;font-weight:600;color:#0f172a;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+
+  /* Feedback */
+  .feedback-item{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid #f1f5f9;}
+  .feedback-item:last-child{border:none;}
+  .fix-icon{font-size:16px;flex-shrink:0;margin-top:1px;}
+  .feedback-item p{font-size:14px;color:#475569;line-height:1.5;}
+
+  /* Skills */
+  .tags{display:flex;flex-wrap:wrap;gap:6px;}
+  .tag{padding:4px 12px;border-radius:20px;font-size:12px;font-weight:500;}
+  .tag-skill{background:#eff6ff;color:#2563eb;border:1px solid #bfdbfe;}
+  .tag-matched{background:#f0fdf4;color:#15803d;border:1px solid #bbf7d0;}
+  .tag-missing{background:#fef2f2;color:#dc2626;border:1px solid #fecaca;}
+
+  .cta{background:linear-gradient(135deg,#3b82f6,#2563eb);color:#fff;border:none;padding:14px 28px;
+    border-radius:12px;font-size:15px;font-weight:600;cursor:pointer;display:inline-block;text-decoration:none;
+    margin-top:20px;font-family:'Inter',sans-serif;}
+  .cta:hover{box-shadow:0 6px 20px rgba(59,130,246,0.4);}
+
+  .jd-note{background:#fffbeb;border:1px solid #fde68a;color:#92400e;padding:12px 16px;border-radius:8px;
+    font-size:13px;margin-bottom:20px;}
+  .section-full{grid-column:1/-1;}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-brand">🧬 CareerDNA</div>
+  <div class="nav-links">
+    <a href="/home">🏠 Analyze</a>
+    <a href="/career-paths">🗺 Career Paths</a>
+    <span style="color:rgba(255,255,255,0.3)">|</span>
+    <a href="/logout" class="logout">Logout</a>
+  </div>
+</nav>
+<main>
+  <a href="/home" class="back-btn">← Analyze Another Resume</a>
+
+  <!-- Score Hero -->
+  <div class="score-hero">
+    <div class="score-ring" style="--pct:{{ ats_score }}">
+      <span>{{ ats_score }}</span>
+    </div>
+    <div class="score-info">
+      <h2>⚠️ ATS Score Needs Improvement</h2>
+      <p>Your score of <b>{{ ats_score }}/100</b> is below the 75-point threshold.<br>
+      Follow the feedback below to significantly improve your resume.</p>
+      {% if jd_provided %}
+      <div class="score-formula">
+        <b>Formula Used (JD Mode):</b> 40% JD keyword match + 35% structure + 15% action verbs + 10% formatting
+      </div>
+      {% else %}
+      <div class="score-formula">
+        <b>Formula Used:</b> 30% skills + 20% sections + 15% action verbs + 15% keywords + 10% bullets + 5% metrics + 5% length
+      </div>
+      {% endif %}
+    </div>
+  </div>
+
+  {% if not jd_provided %}
+  <div class="jd-note">💡 <b>Tip:</b> Add a Job Description on the analyzer page for a more accurate, keyword-matched ATS score.</div>
+  {% endif %}
+
+  <div class="grid">
+
+    <!-- Feedback -->
+    <div class="panel section-full">
+      <h3>🔧 What to Fix</h3>
+      {% for item in feedback %}
+      <div class="feedback-item">
+        <span class="fix-icon">❌</span>
+        <p>{{ item }}</p>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- Skills Found -->
+    <div class="panel">
+      <h3>✅ Skills Detected ({{ skills|length }})</h3>
+      <div class="tags">
+        {% for s in skills %}
+        <span class="tag tag-skill">{{ s }}</span>
+        {% else %}
+        <p style="color:#94a3b8;font-size:14px;">No skills extracted.</p>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- JD Keywords -->
+    {% if jd_provided %}
+    <div class="panel">
+      <h3>🎯 JD Keyword Match</h3>
+      {% if matched_keywords %}
+      <p style="font-size:13px;color:#64748b;margin-bottom:8px;">✅ Matched ({{ matched_keywords|length }})</p>
+      <div class="tags" style="margin-bottom:14px;">
+        {% for k in matched_keywords[:12] %}
+        <span class="tag tag-matched">{{ k }}</span>
+        {% endfor %}
+      </div>
+      {% endif %}
+      {% if missing_keywords %}
+      <p style="font-size:13px;color:#64748b;margin-bottom:8px;">❌ Missing ({{ missing_keywords|length }})</p>
+      <div class="tags">
+        {% for k in missing_keywords[:12] %}
+        <span class="tag tag-missing">{{ k }}</span>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+    {% else %}
+    <!-- Sections -->
+    <div class="panel">
+      <h3>📋 Sections</h3>
+      {% for label, val in [('Education', education), ('Projects', projects), ('Experience', experience)] %}
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #f1f5f9;">
+        <span style="font-size:14px;color:#475569;">{{ label }}</span>
+        <span style="font-size:13px;font-weight:600;color:{% if val and val.strip() %}#15803d{% else %}#dc2626{% endif %}">
+          {% if val and val.strip() %}✓ Present{% else %}✗ Missing{% endif %}
+        </span>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- Improve form -->
+    <div class="panel section-full">
+      <h3>🚀 Improve Your Resume</h3>
+      <p style="font-size:14px;color:#64748b;margin-bottom:16px;">Select a target role and we'll show you exactly which skills you're missing.</p>
+      <form action="/skill-gap" method="POST">
+        {% for s in skills %}
+        <input type="hidden" name="skills" value="{{ s }}">
+        {% endfor %}
+        <input type="hidden" name="education" value="{{ education }}">
+        <input type="hidden" name="projects" value="{{ projects }}">
+        <input type="hidden" name="experience" value="{{ experience }}">
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <select name="role" style="padding:10px 14px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:14px;font-family:'Inter',sans-serif;outline:none;color:#0f172a;">
+            <option>Data Scientist</option>
+            <option>Data Analyst</option>
+            <option>Full Stack Developer</option>
+            <option>Machine Learning Engineer</option>
+            <option>DevOps Engineer</option>
+            <option>Cloud Architect</option>
+            <option>Cybersecurity Analyst</option>
+            <option>AI Research Scientist</option>
+            <option>Product Manager</option>
+            <option>UI/UX Designer</option>
+          </select>
+          <button type="submit" class="cta" style="margin-top:0;padding:10px 24px;font-size:14px;">Analyze Skill Gap →</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</main>
+</body>
+</html>

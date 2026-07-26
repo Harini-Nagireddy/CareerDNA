@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Role Matching</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f4f6f8;
+        }
+
+        h2 {
+            color: #2c3e50;
+        }
+
+        h3 {
+            color: #34495e;
+        }
+
+        .box {
+            background: white;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 10px;
+            box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        th {
+            background-color: #2c3e50;
+            color: white;
+        }
+    </style>
+
+</head>
+<body>
+
+<!-- 🟩 ATS SCORE -->
+<div class="box">
+    <h2>🎉 Your ATS Score: {{ ats_score }}</h2>
+    <h3>✅ Your resume is ATS optimized</h3>
+</div>
+
+<!-- 📊 FEEDBACK (POSITIVE / REMAINING IMPROVEMENTS) -->
+<div class="box">
+
+    <h3>📊 ATS Analysis</h3>
+
+    {% if feedback %}
+    <ul>
+        {% for tip in feedback %}
+            <li>{{ tip }}</li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>🚀 Excellent! Your resume passed all ATS checks.</p>
+    {% endif %}
+
+</div>
+
+<!-- 🎯 ROLE MATCHING -->
+<div class="box">
+
+<h2>🎯 Eligible Roles</h2>
+
+<table>
+<tr>
+<th>Role</th>
+<th>Match %</th>
+</tr>
+
+{% for role, score in results.items() %}
+<tr>
+<td>{{ role }}</td>
+<td>{{ score }}%</td>
+</tr>
+{% endfor %}
+
+</table>
+
+</div>
+
+<!-- 🧠 SKILLS USED -->
+<div class="box">
+
+<h3>🧠 Based on your skills:</h3>
+<p>{{ skills | join(', ') }}</p>
+
+</div>
+
+</body>
+</html>
