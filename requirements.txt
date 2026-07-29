@@ -6,3 +6,4 @@ pandas
 numpy
 scikit-learn
 docx2pdf
+gunicorn==23.0.0
