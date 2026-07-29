@@ -17,19 +17,34 @@ from modules.resume_optimizer import generate_optimization_tips   # ← NEW
 
 app = Flask(__name__)
 app.secret_key = "resumedna_secret_2024"
-app.config["UPLOAD_FOLDER"] = "uploads"
 
-USERS_FILE = "data/users.json"
+# Base directory
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+# Absolute paths
+UPLOAD_FOLDER = os.path.join(BASE_DIR, "uploads")
+DATA_FOLDER = os.path.join(BASE_DIR, "data")
+
+# Create folders if they don't exist
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+os.makedirs(DATA_FOLDER, exist_ok=True)
+
+# Configure app
+app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
+
+# Users file
+USERS_FILE = os.path.join(DATA_FOLDER, "users.json")
 
 # ── User store helpers ──────────────────────────────────────
 def load_users():
     if os.path.exists(USERS_FILE):
-        with open(USERS_FILE) as f:
+        with open(USERS_FILE, "r", encoding="utf-8") as f:
             return json.load(f)
+    
     return {"admin": "password123", "student": "college2024"}
 
 def save_users(users):
-    with open(USERS_FILE, "w") as f:
+    with open(USERS_FILE, "w", encoding="utf-8") as f:
         json.dump(users, f, indent=2)
 
 
@@ -312,7 +327,7 @@ def create_resume():
     final_skills    = list(set(original_skills + required_skills))
 
     filename = generate_resume(name, role, final_skills, education, projects, experience, filetype)
-    return send_from_directory("uploads", filename, as_attachment=True)
+    return send_from_directory(app.config["UPLOAD_FOLDER"], filename, as_attachment=True)
 
 
 if __name__ == "__main__":
